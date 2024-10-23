@@ -8,9 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>com.alonsofritz</groupId>
 	<artifactId>simplified-authenticator-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>simplified-authenticator-spring</name>
 	<description>Simplified authentication with Spring and Clean Architecture</description>
 	<url/>
@@ -49,21 +51,9 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-api</artifactId>
-			<version>0.12.6</version>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-impl</artifactId>
-			<version>0.12.6</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt-jackson</artifactId>
-			<version>0.12.6</version>
-			<scope>runtime</scope>
+  			<groupId>com.auth0</groupId>
+  			<artifactId>java-jwt</artifactId>
+  			<version>4.4.0</version>
 		</dependency>
 	</dependencies>
 
@@ -72,7 +62,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+            </plugin>
 		</plugins>
 	</build>
 
