@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UserRepository {
     UserEntity save(UserEntity user);
     Optional<UserEntity> findByGlobalId(UUID globalId);
+    Optional<UserEntity> findByEmail(String email);
 }

@@ -32,7 +32,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
 
-        String token = authenticateService.execute(loginRequestDto.username(), loginRequestDto.password());
+        String token = authenticateService.execute(loginRequestDto.email(), loginRequestDto.password());
         return ResponseEntity.ok(new LoginResponseDto(token));
     }
 

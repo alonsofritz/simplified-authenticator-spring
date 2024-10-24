@@ -31,6 +31,8 @@ public class JwtTokenProvider {
             Algorithm algorithm = Algorithm.RSA256(rsaPublicKey, rsaPrivateKey);
             return JWT.create()
                 .withIssuer("auth0")
+                .withSubject(user.getGlobalId().toString())
+                .withExpiresAt(new Date(System.currentTimeMillis() + expiration))
                 .sign(algorithm);
             
         } catch (JWTCreationException exception){

@@ -12,4 +12,5 @@ import java.util.UUID;
 @Repository("userMySqlRepository")
 public interface UserMySqlRepository extends JpaRepository<UserEntity, Long>, UserRepository {
     Optional<UserEntity> findByGlobalId(UUID globalId);
+    Optional<UserEntity> findByEmail(String email);
 }
