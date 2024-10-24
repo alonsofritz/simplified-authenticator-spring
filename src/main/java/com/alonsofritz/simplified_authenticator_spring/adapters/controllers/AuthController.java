@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alonsofritz.simplified_authenticator_spring.adapters.dtos.LoginRequestDto;
 import com.alonsofritz.simplified_authenticator_spring.adapters.dtos.LoginResponseDto;
+import com.alonsofritz.simplified_authenticator_spring.adapters.dtos.SignUpRequestDto;
 import com.alonsofritz.simplified_authenticator_spring.domain.services.AuthenticateService;
+import com.alonsofritz.simplified_authenticator_spring.domain.services.SignUpService;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,8 +20,12 @@ public class AuthController {
     @Qualifier("authenticateServiceImpl")
     private final AuthenticateService authenticateService;
 
-    public AuthController(AuthenticateService authenticateService) {
+    @Qualifier("signUpServiceImpl")
+    private final SignUpService signUpService;
+
+    public AuthController(AuthenticateService authenticateService, SignUpService signUpService) {
         this.authenticateService = authenticateService;
+        this.signUpService = signUpService;
     }
 
 
@@ -28,6 +34,12 @@ public class AuthController {
 
         String token = authenticateService.execute(loginRequestDto.username(), loginRequestDto.password());
         return ResponseEntity.ok(new LoginResponseDto(token));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignUpRequestDto signUpRequestDto) {
+        signUpService.execute(signUpRequestDto.email(), signUpRequestDto.password(), signUpRequestDto.permission());
+        return ResponseEntity.ok("User created");
     }
 
     // @GetMapping("/verify")

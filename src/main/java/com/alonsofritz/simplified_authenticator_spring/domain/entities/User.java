@@ -1,20 +1,40 @@
 package com.alonsofritz.simplified_authenticator_spring.domain.entities;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class User {
-    private String username;
+    private Long id;
+    private UUID globalId;
+    private String email;
     private String password;
     private Set<String> permissions;
 
-    public User(String username, String password, Set<String> permissions) {
-        this.username = username;
+    public User(String email, String password, Set<String> permissions) {
+        this.globalId = UUID.randomUUID();
+        this.email = email;
         this.password = password;
         this.permissions = permissions;
     }
 
-    public String getUsername() {
-        return username;
+    public User(Long id, UUID globalId, String email, String password, Set<String> permissions) {
+        this.id = id;
+        this.globalId = globalId;
+        this.email = email;
+        this.password = password;
+        this.permissions = permissions;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UUID getGlobalId() {
+        return globalId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
