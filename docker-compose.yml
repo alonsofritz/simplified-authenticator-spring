@@ -1,47 +1,64 @@
-version: '3.8'
-
 services:
   app:
     build: .
     ports:
       - "8080:8080"
     depends_on:
-      - mongodb
-      - redis
-      - rabbitmq
+      # - mongodb
+      # - redis
+      # - rabbitmq
+      - mysql
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/simplified_authenticator
       SPRING_REDIS_HOST: redis
       SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/simplified_authenticator
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: example
     networks:
       - app-network
 
-  mongodb:
-    image: mongo:latest
+  # mongodb:
+  #   image: mongo:latest
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo-data:/data/db
+  #   networks:
+  #     - app-network
+
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - app-network
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   networks:
+  #     - app-network
+
+  mysql:
+    image: mysql:latest
     ports:
-      - "27017:27017"
+      - "3306:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: simplified_authenticator
     volumes:
-      - mongo-data:/data/db
-    networks:
-      - app-network
-
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    networks:
-      - app-network
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+      - mysql-data:/var/lib/mysql
     networks:
       - app-network
 
 volumes:
-  mongo-data:
+  # mongo-data:
+  mysql-data:
 
 networks:
   app-network:
