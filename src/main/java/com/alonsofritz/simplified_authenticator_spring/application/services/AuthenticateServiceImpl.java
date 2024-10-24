@@ -9,6 +9,7 @@ public class AuthenticateServiceImpl implements AuthenticateService {
 
     @Override
     public String execute(String username, String password) {
+        System.out.println(username + " " + password);
         if (username.equals("alonso") && password.equals("1234")) {
             return "token";
         }
