@@ -4,6 +4,7 @@ Projeto simplificado de um autenticador de usuários utilizando JWT, Spring Boot
 ## Índice
 
 1. [Estrutura de Pastas](#estrutura-de-pastas)
+   
    2. [Diferença entre Services na Application e Domain](#diferença-entre-services-na-application-e-domain)
    3. [Diferença entre Mappers da Adapters e da Application](#diferença-entre-mappers-da-adapters-e-da-application)
    4. [Diferença entre Use Cases e Services da Application](#diferença-entre-use-cases-e-services-da-application)
