@@ -1,5 +1,6 @@
 package com.alonsofritz.simplified_authenticator_spring.infra.security.token;
 
+import com.alonsofritz.simplified_authenticator_spring.adapters.gateways.TokenProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 
 @Component("jwtTokenProvider")
-public class JwtTokenProvider {
+public class JwtTokenProvider implements TokenProvider {
 
     @Value("${private.rsa.key}")
     private RSAPrivateKey rsaPrivateKey;
@@ -34,7 +35,7 @@ public class JwtTokenProvider {
                 .withSubject(user.getGlobalId().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + expiration))
                 .sign(algorithm);
-            
+
         } catch (JWTCreationException exception){
             // Invalid Signing configuration / Couldn't convert Claims.
         }
@@ -64,5 +65,10 @@ public class JwtTokenProvider {
     public boolean isTokenExpired(String token) {
         DecodedJWT jwt = verifyToken(token);
         return jwt.getExpiresAt().before(new Date());
+    }
+
+    @Override
+    public String getEmailFromToken(String token) {
+        return "";
     }
 }
