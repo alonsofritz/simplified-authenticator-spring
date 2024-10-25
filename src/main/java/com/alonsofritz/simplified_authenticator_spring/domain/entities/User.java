@@ -5,12 +5,20 @@ import java.util.UUID;
 
 public class User {
     private Long id;
-    private UUID globalId;
-    private String email;
-    private String password;
-    private Set<String> permissions;
+    private final UUID globalId;
+    private final String email;
+    private final String password;
+    private final Set<String> permissions;
 
     public User(String email, String password, Set<String> permissions) {
+        this.globalId = UUID.randomUUID();
+        this.email = email;
+        this.password = password;
+        this.permissions = permissions;
+    }
+
+    public User(Long id, String email, String password, Set<String> permissions) {
+        this.id = id;
         this.globalId = UUID.randomUUID();
         this.email = email;
         this.password = password;

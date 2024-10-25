@@ -1,12 +1,8 @@
 package com.alonsofritz.simplified_authenticator_spring.application.repositories;
 
-import com.alonsofritz.simplified_authenticator_spring.infra.persistence.mysql.entities.UserEntity;
-
-import java.util.UUID;
-import java.util.Optional;
+import com.alonsofritz.simplified_authenticator_spring.domain.entities.User;
 
 public interface UserRepository {
-    UserEntity save(UserEntity user);
-    Optional<UserEntity> findByGlobalId(UUID globalId);
-    Optional<UserEntity> findByEmail(String email);
+    void save(User user);
+    User findByEmail(String email);
 }
